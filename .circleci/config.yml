@@ -24,9 +24,13 @@ workflows:
     jobs:
       - build
 
-  e2e-test:
-    jobs:
-      - cron-build
+  nightly:
     triggers:
       - schedule:
-          cron: '* * * * *'
+          cron: "* * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cron-build
